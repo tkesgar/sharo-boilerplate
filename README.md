@@ -2,7 +2,7 @@
 
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 [![Build Status](https://travis-ci.org/tkesgar/sharo-scripts.svg?branch=master)](https://travis-ci.org/tkesgar/sharo-scripts)
-[![codecov](https://codecov.io/gh/tkesgar/sharo-scripts/branch/master/graph/badge.svg)](https://codecov.io/gh/tkesgar/sharo-scripts)
+[![codecov](https://codecov.io/gh/tkesgar/sharo-scripts/branch/master/graph/badge.svg)](https://codecov.io/gh/tkesgar/sharo-scripts) [![Greenkeeper badge](https://badges.greenkeeper.io/tkesgar/sharo-scripts.svg)](https://greenkeeper.io/)
 
 This is a dependency package for [sharo][sharo] boilerplate, which bundles several packages such as [Next.js][next], [node-sass][node-sass] and [Express][express] into a single dependency package.
 
