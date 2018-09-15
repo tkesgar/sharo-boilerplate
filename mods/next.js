@@ -1,8 +1,11 @@
 const next = require('next') // eslint-disable-line import/no-unresolved
-const {getDev} = require('../lib/env')
+const {getDev} = require('../util/env')
 
 /**
  * This mod adds Next.js request handler to app.
+ *
+ * Note that `next` is listed as `peerDependencies` and should be installed
+ * manually.
  *
  * Docs: https://nextjs.org/docs
  *

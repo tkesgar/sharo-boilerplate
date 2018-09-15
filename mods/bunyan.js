@@ -1,5 +1,5 @@
 const bunyan = require('bunyan')
-const {getDev} = require('../lib/env')
+const {getDev} = require('../util/env')
 
 /**
  * This mod adds a bunyan logger instance at `app.log`. It also adds a

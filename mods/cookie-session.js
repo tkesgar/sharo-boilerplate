@@ -1,5 +1,5 @@
 const cookieSession = require('cookie-session')
-const {getProduction} = require('../lib/env')
+const {getProduction} = require('../util/env')
 
 /**
  * This mod adds cookie-based session provider middleware to app.
