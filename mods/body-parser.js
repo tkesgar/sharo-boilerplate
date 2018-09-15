@@ -1,7 +1,8 @@
 const express = require('express')
 
 /**
- * This mod adds body perser middlewares to app.
+ * This mod adds body parser middlewares for parsing `application/json` and
+ * `application/x-www-form-urlencoded` bodies.
  *
  * Docs:
  *   - http://expressjs.com/en/4x/api.html#express.json

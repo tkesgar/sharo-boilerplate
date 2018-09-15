@@ -1,8 +1,9 @@
 const dotenv = require('dotenv')
 
 /**
- * Loads .env using `dotenv`. Useful in boilerplate to avoid installing dotenv
- * in `package.json` of the boilerplate.
+ * Loads .env files using `dotenv`.
+ *
+ * Useful in boilerplate to avoid installing dotenv in the `package.json`.
  *
  * Docs: https://www.npmjs.com/package/dotenv
  */

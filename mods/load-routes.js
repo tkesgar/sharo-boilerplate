@@ -11,6 +11,9 @@ const {sync: glob} = require('glob')
  * Route objects can provide an optional `mountPath` property, which will be
  * used as path to mount the route in app.
  *
+ * Note that unlike `load-mods` and `load-middlewares`, route paths are *not*
+ * sorted.
+ *
  * @param {Express.Application} app Express app to be modded
  */
 function modLoadRoutes(app) {

@@ -1,7 +1,7 @@
 const cookieParser = require('cookie-parser')
 
 /**
- * This mod adds cookie parser to app.
+ * This mod adds the cookie parser middleware to app.
  *
  * If `COOKIE_SECRET` environment variable is defined, it will be used as
  * `secret` for the parser. To provide multiple secret, split with semicolon

@@ -2,32 +2,45 @@ const express = require('express')
 const stdMods = require('./mods')
 
 /**
- * Given an array of `mods`, create a new Express app and apply each mod in
- * order. Then, resolve with the Express app.
+ * Given an array of `mods`, create a new Express app and apply all mod in
+ * `mods`. Then, resolve with the Express app.
  *
- * Mods are anything that can be called with an Express app as parameter.
- * Mod return values or, in case of async function resolved values, are
- * ignored.
+ * A mod is:
+ *   1. A function. In this case, mod will be applied by calling the mod with an
+ *      Express app as a single argument. Mod return/resolve values are ignored.
+ *   2. An array. In this case, all values inside the array is assumed to be
+ *      mods and applied to the Express app in order.
  *
- * @param {any[]} mods An array of sharo mods.
- * @returns {Promise<Express.Application>} A Promise that resolves to an Express app.
+ * If `mods` are not provided, a standard set of mods is used.
+ *
+ * If you use `sharo-scripts/mods/load-mods`, you can put mods in a `mods/`
+ * directory and sharo will load all of them. See the script for more details.
+ *
+ * @param {any[]} mods Array of mods
+ * @returns {Promise<Express.Application>} Express app promise
  */
 async function sharo(mods = stdMods) {
   const app = express()
-
-  /* eslint-disable no-await-in-loop */
-  for (const mod of mods) {
-    if (Array.isArray(mod)) {
-      for (const subMod of mod) {
-        await subMod(app)
-      }
-    } else { // (!Array.isArray(mod))
-      await mod(app)
-    }
-  }
-  /* eslint-enable no-await-in-loop */
-
+  await recursiveApplyMods(app, mods)
   return app
 }
 
 module.exports = sharo
+
+/**
+ * Helper function to recursively apply mods.
+ *
+ * @param {Express.Application} app Express app that will be passed to mods
+ * @param {(function(Express.Application): Promise<void>)[]} mods Array of mods
+ */
+async function recursiveApplyMods(app, mods) {
+  /* eslint-disable no-await-in-loop */
+  for (const mod of mods) {
+    if (Array.isArray(mod)) {
+      await recursiveApplyMods(app, mod)
+    } else {
+      await mod(app)
+    }
+  }
+  /* eslint-enable no-await-in-loop */
+}

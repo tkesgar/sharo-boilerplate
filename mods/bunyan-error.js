@@ -1,6 +1,7 @@
 /**
- * This mod works in conjunction with `bunyan` mod. It adds an error handler
- * middleware which logs all errors using the logger available in `req.log`.
+ * This mod adds an error handler middleware which calls `req.log.error({err})`
+ * and pass the error to next error middleware. It is intended to work with
+ * `bunyan` mod, which adds a logger child instance in request object.
  *
  * Note that since this mod adds an error handler, this mod should be loaded
  * after all other mods.

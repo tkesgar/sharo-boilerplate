@@ -3,12 +3,21 @@ const withSass = require('@zeit/next-sass')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 
 /**
- * A Next.js configuration for use in sharo boilerplate.
+ * A Next.js configuration for use in sharo boilerplate, intended for use in
+ * `next.config.js`.
  *
- * Uses `@zeit/next-sass` and `@zeit/next-bundle-analyzer` with minimal
- * extra configuration.
+ * Features:
+ *   - SASS/SCSS support via `@zeit/next-sass`
+ *   - Bundle analysis reporter via `@zeit/next-bundle-analyzer`
+ *
+ * To generate bundle analysis report, provide `BUNDLE_ANALYZE` with one of the
+ * following values:
+ *   - `server`: generate server report only
+ *   - `client`: generate client report only
+ *   - `both`: generate both server and client report
  *
  * Docs:
+ *   - https://nextjs.org/docs#custom-configuration
  *   - https://www.npmjs.com/package/@zeit/next-sass
  *   - https://www.npmjs.com/package/@zeit/next-bundle-analyzer
  */

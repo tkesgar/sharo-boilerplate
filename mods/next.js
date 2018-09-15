@@ -1,4 +1,4 @@
-const next = require('next')
+const next = require('next') // eslint-disable-line import/no-unresolved
 const {getDev} = require('../lib/env')
 
 /**
