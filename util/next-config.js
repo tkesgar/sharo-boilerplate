@@ -6,6 +6,9 @@ const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
  * A Next.js configuration for use in sharo boilerplate, intended for use in
  * `next.config.js`.
  *
+ * Note that while `next` is listed as `peerDependencies` and should be
+ * installed manually, the plugins and tools are already installed by sharo.
+ *
  * Features:
  *   - SASS/SCSS support via `@zeit/next-sass`
  *   - Bundle analysis reporter via `@zeit/next-bundle-analyzer`
