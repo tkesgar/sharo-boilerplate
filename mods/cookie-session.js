@@ -5,11 +5,11 @@ const {getProduction} = require('../util/env')
  * This mod adds cookie-based session provider middleware to app.
  *
  * Note that `SESSION_KEYS` environment variable is required. If it is not
- * provided, this mod will throw an error. To provide multiple secret in
+ * provided, this mod will throw an error. To provide multiple secrets in
  * `SESSION_KEYS`, split it with semicolon (`;`) e.g. `'abc;123;456'`.
  *
- * `secure` is enabled if `trust proxy` app settings table is set to truthy.
- * Otherwise, `secure` is enabled only in production.
+ * `secure` is enabled if `trust proxy` app settings table is truthy or in
+ * production.
  *
  * Docs: https://www.npmjs.com/package/cookie-session
  *
@@ -23,7 +23,7 @@ function modCookieSession(app) {
 
   app.use(cookieSession({
     keys: sessionKeys.split(';'),
-    secure: Boolean(app.get('trust proxy')) || getProduction()
+    secure: app.get('trust proxy') || getProduction()
   }))
 }
 
