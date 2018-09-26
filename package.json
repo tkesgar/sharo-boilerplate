@@ -50,7 +50,7 @@
   "devDependencies": {
     "cross-env": "^5.2.0",
     "eslint-plugin-jest": "^21.22.0",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0",
     "jest": "^23.6.0",
     "xo": "^0.23.0"
   },
