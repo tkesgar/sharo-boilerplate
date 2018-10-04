@@ -1,5 +1,5 @@
 /**
- * A standard set of sharo mods.
+ * A standard set of mods.
  */
 const stdMods = [
   require('./trust-proxy'),
@@ -7,8 +7,9 @@ const stdMods = [
   require('./helmet'),
   require('./body-parser'),
   require('./cookie-parser'),
-  require('./csurf'),
   require('./cookie-session'),
+  require('./csurf'),
+  require('./load-mods'),
   require('./load-middlewares'),
   require('./load-routes'),
   require('./next'),
