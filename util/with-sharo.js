@@ -12,8 +12,7 @@ const plugins = [
 ]
 
 /**
- * Returns a Next.js configuration intended for use in `next.config.js`. The
- * plugins and tools are already included in sharo.
+ * This function behaves just like a standard Next.js plugins.
  *
  * Features:
  *   - Bundle analysis reporter via `@zeit/next-bundle-analyzer`
@@ -34,12 +33,14 @@ const plugins = [
  *   - https://www.npmjs.com/package/@zeit/next-sass
  *   - https://www.npmjs.com/package/@zeit/next-workers
  *
- * @returns {any} Next.js configuration object
+ * @param {any} nextConfig Next.js configuration object
+ * @returns {any} New Next.js configuration object
  */
-function createNextConfig() {
+function withSharo(nextConfig = {}) {
   const {BUNDLE_ANALYZE} = process.env
 
   const config = {
+    ...nextConfig,
     analyzeServer: ['server', 'both'].includes(BUNDLE_ANALYZE),
     analyzeBrowser: ['browser', 'both'].includes(BUNDLE_ANALYZE),
     bundleAnalyzerConfig: {
@@ -57,4 +58,4 @@ function createNextConfig() {
   return plugins.reduce((cfg, fn) => fn(cfg), config)
 }
 
-module.exports = createNextConfig
+module.exports = withSharo
