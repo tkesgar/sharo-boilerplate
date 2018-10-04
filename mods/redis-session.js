@@ -2,26 +2,19 @@ const session = require('express-session')
 const connectRedis = require('connect-redis')
 const {getProduction} = require('../util/env')
 
-const RedisStore = connectRedis(session)
-
 /**
- * This mod adds Redis-backed session provider middleware to app.
+ * This mod adds Redis-backed session provider middleware to app, using
+ * `express-session` middleware and `connect-redis` store.
  *
- * Note that one of the following environment variables is required to be used
- * as secret string(s) for the identifier cookie:
- *   - `COOKIE_SECRET` (for compatibility with `cookie-parser`)
- *   - `SESSION_KEYS`
+ * `resave` and `saveUninitialized` is set to `false`, while `secure` is set to
+ * `true` if `trust proxy` app settings table is truthy or in production.
  *
- * If none are provided, this mod will throw an error. If both are provided,
- * `COOKIE_SECRET` is used instead of `SESSION_KEYS`. To provide multiple
- * secrets, split it with semicolon (`;`) e.g. `'abc;123;456'`.
- *
- * Custom configuration to Redis database can be provided as JSON at
- * `REDIS_SESSION_CONFIG` environment variable.
- *
- * `secure` is enabled if `trust proxy` app settings table is truthy or in
- * production. `resave` and `saveUninitialized` is set to `false` because the
- * Redis store should work without problems with that.
+ * Environment variables:
+ *   - **SECRET** *(required)*: secret string(s) for cookie-parser to encrypt
+ *     the cookies. To provide multiple secrets, use a semicolon between each
+ *     strings, e.g. `abc;123;456`.
+ *   - **REDIS_SESSION**: a JSON string containing custom configurations for
+ *     connect-redis (default: none)
  *
  * Docs:
  *   - https://www.npmjs.com/package/express-session
@@ -30,17 +23,25 @@ const RedisStore = connectRedis(session)
  * @param {Express.Application} app Express app to be modded
  */
 function modSession(app) {
-  const sessionKeys = process.env.COOKIE_SECRET || process.env.SESSION_KEYS
-  if (!sessionKeys) {
-    throw new Error('\'COOKIE_SECRET\' or \'SESSION_KEYS\' environment variables does not exist')
+  const {
+    SECRET: secret,
+    REDIS_SESSION: redisConfig = '{}'
+  } = process.env
+
+  if (!secret) {
+    throw new Error('\'SECRET\' environment variable does not exist')
   }
 
+  const RedisStore = connectRedis(session)
+
   app.use(session({
-    secret: sessionKeys.split(';'),
-    secure: app.get('trust proxy') || getProduction(),
-    store: new RedisStore(JSON.parse(process.env.REDIS_SESSION_CONFIG || '{}')),
-    resave: false,
-    saveUninitialized: false
+    cookie: {
+      secure: Boolean(app.get('trust proxy')) || getProduction()
+    },
+    secret: secret.split(';'),
+    store: new RedisStore(JSON.parse(redisConfig)),
+    saveUninitialized: false,
+    resave: false
   }))
 }
 
