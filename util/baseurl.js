@@ -3,7 +3,7 @@
  *
  * If there is `BASEURL` environment variable defined, use it as base URL.
  * Otherwise, determine the base URL from `PROTOCOL` (defaults to `'http'`),
- * `DOMAIN` (`'localhost'`), and `PORT` (`'80'`) concacenated into
+ * `DOMAIN` (`'localhost'`), and `PORT` (`'80'`) concatenated into
  * `[PROTOCOL]://[DOMAIN]:[PORT]`.
  *
  * Note that `[PORT]` will be omitted on:

@@ -9,7 +9,7 @@ const {sync: glob} = require('glob')
  * ignored.
  *
  * Mod paths are sorted before run. This means you can use Linux config-style
- * naming to order mods:
+ * naming for the mods:
  *   - `00-first.js`
  *   - `01-second.js`
  *   - `10-third.js`

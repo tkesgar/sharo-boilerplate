@@ -10,7 +10,7 @@ const {sync: glob} = require('glob')
  * ignored.
  *
  * Middleware paths are sorted before added. This means you can use Linux
- * config-style naming to order middlewares:
+ * config-style naming for the middlewares:
  *   - `00-first.js`
  *   - `01-second.js`
  *   - `10-third.js`

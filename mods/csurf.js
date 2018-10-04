@@ -1,7 +1,7 @@
 const csurf = require('csurf')
 
 /**
- * This mod adds csurf middleware to app for mitigating CSRF attacks.
+ * This mod adds csurf middleware to app for CSRF attacks mitigation.
  *
  * Note that csurf here is configured to use cookies instead of session.
  * This allows csurf to be used without session support, but it requires a

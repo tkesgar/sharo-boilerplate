@@ -2,15 +2,13 @@ const bunyan = require('bunyan')
 const {getDev} = require('../util/env')
 
 /**
- * This mod adds a bunyan logger instance at `app.log`. It also adds a
- * middleware to add a child logger instance at `req`, with `req` and `res`
- * added into log.
+ * This mod adds a bunyan logger instance at `app.log`. It also adds a child
+ * logger instance at every requests, with `req` and `res` added into log.
  *
- * `LOG_NAME` environment variable is used as bunyan logger name. It will
- * default to `app` if not provided.
- *
- * `LOG_LEVEL` environment variable is used as bunyan logger level. It will
- * default to `debug` in development and `info` otherwise.
+ * Environment variables:
+ *   - **LOG_NAME**: bunyan logger name (default: `'app'`).
+ *   - **LOG_LEVEL**: bunyan logger level (default: `'debug'` in development,
+ *     otherwise `'info'`).
  *
  * Docs: https://www.npmjs.com/package/bunyan
  *

@@ -1,7 +1,9 @@
 /**
- * This mod adds `trust proxy` settings to the app settings table.
+ * This mod adds `trust proxy` settings to the app settings table, with the
+ * value parsed from `TRUST_PROXY`.
  *
- * The value is read from `TRUST_PROXY` environment variable parsed as JSON.
+ * Environment variable:
+ *   - `TRUST_PROXY`: JSON string containing configuration for 'trust proxy'
  *
  * @param {Express.Application} app Express app to be modded
  */
