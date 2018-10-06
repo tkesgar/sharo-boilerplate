@@ -26,11 +26,11 @@ const baseURL = require('./baseurl')
  *   - https://github.com/jaredhanson/passport-github
  *
  * @param {string} provider Strategy to be created (must be one of the provider string listed above)
- * @param {any} opts Additional options
  * @param {function} verify Callback function
+ * @param {any} opts Additional options
  * @returns {Strategy} The created Passport strategy
  */
-function createStrategy(provider, opts = {}, verify = defaultVerify) {
+function createStrategy(provider, verify = defaultVerify, opts = {}) {
   const {
     FACEBOOK_ID,
     FACEBOOK_SECRET,
