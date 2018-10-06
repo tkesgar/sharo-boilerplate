@@ -1,8 +1,9 @@
-const {Passport} = require('passport')
+const passport = require('passport')
 const createStrategy = require('../util/create-strategy')
 
 function passportMiddleware(opts = {}) {
   const {
+    passportInstance = passport,
     strategies = defaultStrategies(),
     serializeUser = defaultSerializeUser,
     deserializeUser = defaultDeserializeUser,
@@ -10,23 +11,21 @@ function passportMiddleware(opts = {}) {
     session = {}
   } = opts
 
-  const passport = new Passport()
-
   for (const [name, strategy] of Object.entries(strategies)) {
-    passport.use(name, strategy)
+    passportInstance.use(name, strategy)
   }
 
-  passport.serializeUser((user, done) => {
+  passportInstance.serializeUser((user, done) => {
     (async () => done(await serializeUser(user)))().catch(done)
   })
 
-  passport.deserializeUser((data, done) => {
+  passportInstance.deserializeUser((data, done) => {
     (async () => done(await deserializeUser(data)))().catch(done)
   })
 
   return [
-    passport.initialize(initialize),
-    passport.session(session)
+    passportInstance.initialize(initialize),
+    passportInstance.session(session)
   ]
 }
 
