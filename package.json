@@ -1,7 +1,7 @@
 {
   "name": "sharo-scripts",
   "version": "0.4.0",
-  "description": "Dependency package for [sharo][sharo] boilerplate",
+  "description": "Dependency package for sharo boilerplate",
   "author": "Ted Kesgar <t.kesgar@live.com> (https://tkesgar.com)",
   "license": "MIT",
   "repository": {
@@ -50,7 +50,7 @@
     "express": "^4"
   },
   "husky": {
-    "precommit": "cross-env npm run lint && npm test"
+    "pre-commit": "cross-env npm run lint && npm test"
   },
   "xo": {
     "semicolon": false,
