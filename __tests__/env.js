@@ -1,4 +1,4 @@
-const env = require('./env')
+const env = require('../util/env')
 
 describe('with NODE_ENV=development', () => {
   const ENV = 'development'

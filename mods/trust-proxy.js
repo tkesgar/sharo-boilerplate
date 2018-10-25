@@ -8,12 +8,11 @@
  * @param {Express.Application} app Express app to be modded
  */
 function modTrustProxy(app) {
-  const trustProxyJSON = process.env.TRUST_PROXY
-  if (!trustProxyJSON) {
+  const trustProxy = process.env.TRUST_PROXY
+  if (!trustProxy) {
     return
   }
 
-  const trustProxy = JSON.parse(trustProxyJSON)
   app.set('trust proxy', JSON.parse(trustProxy))
 }
 

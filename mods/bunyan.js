@@ -20,7 +20,7 @@ function modBunyan(app) {
   app.log = bunyan.createLogger({
     name: process.env.LOG_NAME || 'app',
     level: process.env.LOG_LEVEL || (dev ? 'debug' : 'info'),
-    stream: dev ? createDevStream() : process.stdout,
+    stream: dev ? devStream() : process.stdout,
     serializers: bunyan.stdSerializers
   })
 
@@ -37,7 +37,7 @@ module.exports = modBunyan
  *
  * @returns {stream} stream for use with bunyan
  */
-function createDevStream() {
+function devStream() {
   const PrettyStream = require('bunyan-prettystream')
 
   const stream = new PrettyStream()

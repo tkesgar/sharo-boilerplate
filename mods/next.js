@@ -4,8 +4,7 @@ const {getDev} = require('../util/env')
 /**
  * This mod adds Next.js request handler to app.
  *
- * Note that `next` is listed as `peerDependencies` and should be installed
- * manually.
+ * Note that `next` should be installed manually.
  *
  * Docs: https://nextjs.org/docs
  *

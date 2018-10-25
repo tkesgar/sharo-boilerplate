@@ -1,5 +1,5 @@
 const express = require('express')
-const stdMods = require('./mods')
+const stdMods = require('./util/std-mods')
 
 /**
  * Given an array of `mods`, create a new Express app and apply all mod in
@@ -8,20 +8,21 @@ const stdMods = require('./mods')
  * A mod is:
  *   1. A function. In this case, mod will be applied by calling the mod with an
  *      Express app as a single argument. Mod return/resolve values are ignored.
- *   2. An array. In this case, all values inside the array is assumed to be
- *      mods and applied to the Express app in order.
+ *   2. An array of mods. In this case, each mod will be applied in order.
  *
  * If `mods` are not provided, a standard set of mods is used.
  *
- * If you use `sharo-scripts/mods/load-mods`, you can put mods in a `mods/`
- * directory and sharo will load all of them. See the script for more details.
+ * If you use `load-mods` mod, you can put mods in a `mods/` directory and sharo
+ * will load all of them. See the module for more details.
  *
  * @param {any[]} mods Array of mods
  * @returns {Promise<Express.Application>} Express app promise
  */
 async function sharo(mods = stdMods) {
   const app = express()
+
   await recursiveApplyMods(app, mods)
+
   return app
 }
 
