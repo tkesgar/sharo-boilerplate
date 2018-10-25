@@ -1,5 +1,6 @@
 const cookieSession = require('cookie-session')
 const {getProduction} = require('../util/env')
+const randomString = require('../util/random-string')
 
 /**
  * This mod adds cookie-based session provider middleware to app.
@@ -8,19 +9,21 @@ const {getProduction} = require('../util/env')
  * production.
  *
  * Environment variables:
- *   - **SECRET** *(required)*: secret string(s) for cookie-parser to encrypt
- *     the cookies. To provide multiple keys, use a semicolon between each
- *     strings, e.g. `abc;123;456`.
+ *   - **SESSION_KEYS**: secret string(s) for cookie-session to encrypt the
+ *     cookies (default: none). To provide multiple keys, use a semicolon
+ *     between each strings, e.g. `abc;123;456`.
+ *
+ * If SESSION_KEYS is not provide, COOKIE_SECRET will be used if provided;
+ * otherwise, a random string will be generated. Note that the random string
+ * will be different with each server start; if the app is restarted, then all
+ * existing client sessions will be invalidated.
  *
  * Docs: https://www.npmjs.com/package/cookie-session
  *
  * @param {Express.Application} app Express app to be modded
  */
 function modCookieSession(app) {
-  const {SECRET: secret} = process.env
-  if (!secret) {
-    throw new Error('\'{SECRET\' environment variable does not exist')
-  }
+  const secret = process.env.SESSION_KEYS || process.env.COOKIE_SECRET || randomString(36)
 
   app.use(cookieSession({
     keys: secret.split(';'),
