@@ -18,15 +18,47 @@ const stdMods = require('./util/std-mods')
  * @param {any[]} mods Array of mods
  * @returns {Promise<Express.Application>} Express app promise
  */
-async function sharo(mods = stdMods) {
+async function createApp(mods = stdMods) {
   const app = express()
 
   await recursiveApplyMods(app, mods)
 
   return app
 }
+exports.createApp = createApp
 
-module.exports = sharo
+/**
+ * Convenience method for running `createApp` and start listening on `PORT`
+ * (default: 3000) using `app.listen()`.
+ *
+ * Errors will be printed using `app.log`; if `app.log` does not exists, the
+ * error will be printed to `stderr` instead.
+ *
+ * @param {any[]} mods Array of mods
+ */
+function start(mods = stdMods) {
+  (async () => {
+    const app = await createApp(mods)
+    const port = parseInt(process.env.PORT, 10) || 3000
+    app.listen(port, err => {
+      if (err) {
+        if (app.log) {
+          app.log.error(err)
+        } else {
+          console.error(err)
+        }
+        process.exitCode = 1
+        return
+      }
+
+      app.log.info(`Server listening at port ${port}`)
+    })
+  })().catch(error => {
+    console.error(error)
+    process.exitCode = 1
+  })
+}
+exports.start = start
 
 /**
  * Helper function to recursively apply mods.
