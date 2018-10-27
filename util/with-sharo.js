@@ -1,15 +1,10 @@
 const path = require('path')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
-const withMdx = require('@zeit/next-mdx')
 const withSass = require('@zeit/next-sass')
 const withWorkers = require('@zeit/next-workers')
 
-const plugins = [
-  withBundleAnalyzer,
-  withMdx,
-  withSass,
-  withWorkers
-]
+// https://github.com/zeit/next-plugins/issues/320
+const withMdx = require('@zeit/next-mdx')()
 
 /**
  * This function behaves just like a standard Next.js plugins.
@@ -39,8 +34,11 @@ const plugins = [
 function withSharo(nextConfig = {}) {
   const {BUNDLE_ANALYZE} = process.env
 
-  const config = {
+  return withBundleAnalyzer(withWorkers(withSass(withMdx({
     ...nextConfig,
+
+    // Configuration for next-bundle-analyzer so it can be controlled via
+    // BUNDLE_ANALYZE environment variables.
     analyzeServer: ['server', 'both'].includes(BUNDLE_ANALYZE),
     analyzeBrowser: ['browser', 'both'].includes(BUNDLE_ANALYZE),
     bundleAnalyzerConfig: {
@@ -53,9 +51,18 @@ function withSharo(nextConfig = {}) {
         reportFilename: path.resolve('./bundles/client.html')
       }
     }
-  }
+    // Custom webpack function
+    // Currently commented out because nothing is specified yet.
+    /*
+    webpack(config, options) {
+      if (typeof nextConfig.webpack === 'function') {
+        return nextConfig.webpack(config, options)
+      }
 
-  return plugins.reduce((cfg, fn) => fn(cfg), config)
+      return config
+    }
+    */
+  }))))
 }
 
 module.exports = withSharo
