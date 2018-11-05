@@ -22,7 +22,7 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@mdx-js/mdx": "^0.15.5",
+    "@mdx-js/mdx": "^0.16.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-mdx": "^1.2.0",
     "@zeit/next-sass": "^1.0.0",
