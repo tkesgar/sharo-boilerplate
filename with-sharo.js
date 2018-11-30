@@ -7,7 +7,7 @@ const withWorkers = require('@zeit/next-workers')
 const withMdx = require('@zeit/next-mdx')()
 
 /**
- * This function behaves just like a standard Next.js plugins.
+ * This function is a Next.js plugin for sharo.
  *
  * Features:
  *   - Bundle analysis reporter via `@zeit/next-bundle-analyzer`
