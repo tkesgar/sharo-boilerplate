@@ -2,7 +2,7 @@
 
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
-> **Note:** This package is currently in development and does not follow semver.
+> **Note:** This package is currently in development and does not follow semver. Instead of using tilde/caret version (e.g. `~0.5.0`, `^0.5.0`), pin against an exact version (e.g. `0.5.0`).
 
 This is the dependency package for [sharo][sharo] boilerplate, just like `react-scripts` in
 `create-react-app`. I create this to make maintenance of my Node.js apps easier (simply update a
@@ -11,9 +11,6 @@ single package).
 ## Usage
 
 Please refer to [sharo][sharo] for detailed documentations, usage, and examples.
-
-For information of what each module does, please refer to the code. Most of them are just a few
-lines of wrapper codes; there are more comment lines than the code itself.
 
 ## Contributing
 
