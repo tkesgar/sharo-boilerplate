@@ -12,43 +12,48 @@
     "url": "https://github.com/tkesgar/sharo-scripts/issues"
   },
   "homepage": "https://github.com/tkesgar/sharo-scripts#readme",
-  "main": "index.js",
+  "files": [
+    "bin/**",
+    "*.js"
+  ],
+  "bin": {
+    "sharo-xo": "./bin/sharo-xo.js"
+  },
   "scripts": {
     "lint": "xo --fix"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "dependencies": {
-    "@mdx-js/mdx": "^0.15.7",
-    "@zeit/next-bundle-analyzer": "^0.1.2",
-    "@zeit/next-mdx": "^1.2.0",
-    "@zeit/next-sass": "^1.0.0",
-    "@zeit/next-workers": "^1.0.0",
+    "@tkesgar/sharo-next": "^0.1.0",
+    "acorn": "^6.0.4",
+    "babel-eslint": "^10.0.1",
     "eslint-config-xo-react": "^0.17.0",
-    "eslint-plugin-jest": "^22.1.0",
     "eslint-plugin-react": "^7.11.1",
-    "next": "^7.0.2",
-    "node-sass": "^4.10.0",
     "postcss-preset-env": "^6.4.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
     "styled-jsx-plugin-postcss": "^2.0.0",
     "stylelint": "^9.9.0",
-    "stylelint-config-recommended": "^2.1.0",
     "stylelint-config-recommended-scss": "^3.2.0",
-    "stylelint-scss": "^3.4.0",
-    "worker-loader": "^2.0.0",
+    "stylelint-scss": "^3.4.1",
     "xo": "^0.23.0"
   },
   "devDependencies": {
-    "husky": "^1.2.0"
+    "husky": "^1.2.0",
+    "next": "^7.0.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "peerDependencies": {
+    "next": "^7"
   },
   "husky": {
-    "pre-commit": "npm run lint"
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "xo": {
-    "semicolon": false,
-    "space": 2
+    "space": 2,
+    "semicolon": false
   }
 }
