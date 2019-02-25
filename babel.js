@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = () => ({
   presets: [
     [
       'next/babel',
@@ -11,4 +11,4 @@ module.exports = {
       }
     ]
   ]
-}
+})
