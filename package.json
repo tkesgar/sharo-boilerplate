@@ -1,6 +1,6 @@
 {
   "name": "sharo-scripts",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Dependency package for sharo boilerplate",
   "author": "Ted Kesgar <t.kesgar@live.com> (https://tkesgar.com)",
   "license": "MIT",
