@@ -1,5 +1,7 @@
 # sharo-scripts
 
+> **DEPRECATED**: This package is now deprecated. Instead, use @tkesgar/sharo-babel, @tkesgar/sharo-next, and stylelint-config-recommended-scss individually.
+
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
 > **Note:** This package is currently in development and does not follow semver. Instead of using tilde/caret version (e.g. `~0.5.0`, `^0.5.0`), pin against an exact version (e.g. `0.5.0`).
